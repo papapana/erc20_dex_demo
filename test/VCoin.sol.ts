@@ -2,7 +2,6 @@ import { SignerWithAddress } from "@nomicfoundation/hardhat-ethers/signers";
 import { expect } from "chai";
 import { ethers } from "hardhat";
 import { VCoin } from "../typechain-types";
-import { token } from "../typechain-types/@openzeppelin/contracts";
 
 describe("VCoin", () => {
   let owner: SignerWithAddress;
@@ -33,6 +32,10 @@ describe("VCoin", () => {
         ownerInitialBalance - BigInt(amount)
       );
       expect(await VCoin.balanceOf(addr1)).to.equal(BigInt(amount));
+      await expect(VCoin.connect(addr2).transfer(addr1.address, 100)).to.be
+        .reverted;
+      // .to.be.revertedWithCustomError(VCoin, "ERC20InsufficientBalance")
+      // .withArgs(addr2.address, 0, 100);
     });
     it("transfer with approval should be possible", async () => {
       const amount = BigInt(2000);

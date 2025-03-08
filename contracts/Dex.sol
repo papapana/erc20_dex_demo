@@ -32,22 +32,31 @@ contract DEX {
         _;
     }
 
+    /**
+     * @dev Returns the price for a given number of tokens.
+     * @param numTokens The number of tokens to get the price for.
+     * @return The total price for the given number of tokens.
+     */
     function getPrice(uint256 numTokens) public view returns(uint256) {
         return numTokens * price;
     }
 
+    /**
+     * @dev Allows the owner to provide liquidity by transferring tokens to the contract.
+     * @param numTokens The number of tokens to transfer to the contract.
+     */
     function provideLiquidity(uint256 numTokens) external onlyOwner {
        if(IERC20(token).balanceOf(msg.sender) < numTokens) {
         revert NotEnoughTokens();
        }
-       IERC20(token).forceApprove(msg.sender, numTokens);
        IERC20(token).safeTransferFrom(msg.sender, address(this), numTokens);
     }
 
+    /**
+     * @dev Allows users to buy tokens by sending Ether to the contract.
+     * @param numTokens The number of tokens to buy.
+     */
     function buy(uint256 numTokens) external payable {
-        if(IERC20(token).balanceOf(address(this)) < numTokens) {
-            revert NotEnoughTokens();
-        }
         uint256 priceToPay = numTokens * price;
         if(msg.value != priceToPay) {
             revert NotRightPrice();
@@ -55,6 +64,10 @@ contract DEX {
         IERC20(token).safeTransfer(msg.sender, numTokens);
     }
 
+    /**
+     * @dev Allows the owner to withdraw Ether from the contract.
+     * @param amount The amount of Ether to withdraw.
+     */
     function withdraw(uint256 amount) external onlyOwner {
         if(address(this).balance < amount) {
             revert NotEnoughEther();
