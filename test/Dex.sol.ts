@@ -81,5 +81,21 @@ describe("Dex", () => {
         ownerBalance - ethers.parseEther("0.01") // allowing 0.01 ETH for gas fees
       );
     });
+
+    it("Non-owner should not be able to withdraw", async () => {
+      const amount = BigInt(2000);
+      // First provide liquidity
+      await vcoin.approve(await Dex.getAddress(), amount);
+      await Dex.provideLiquidity(amount);
+      // Then send ETH to addr1 and let addr1 buy the token
+      await owner.sendTransaction({ to: addr1.address, value: price * amount });
+      await Dex.connect(addr1).buy(amount, { value: price * amount });
+      // Then withdraw Ethereum
+      await expect(Dex.connect(addr1).withdraw(amount)).to.be.revertedWithCustomError(
+        Dex,
+        "OnlyOwnerCanPerformThisAction"
+      );
+
+    });
   });
 });
