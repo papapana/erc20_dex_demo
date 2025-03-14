@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DEX ERC-20</title>
+    <!-- Add Tailwind CSS -->
+    <link href="./main.css" rel="stylesheet" />
+
+    <!-- Add ethers.js for Ethereum interactions -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.5/ethers.umd.min.js"
+      type="application/javascript"
+    ></script>
+    <script src="script.js" type="application/javascript"></script>
+  </head>
+  <body class="bg-gray-100 min-h-screen">
+    <!-- Your content goes here -->
+    <div class="container">
+      <div class="row">
+        <div class="item">
+          <h3>Token Price: <span id="tokenPrice"></span></h3>
+          <button
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            onclick="getPrice()"
+          >
+            Update Price
+          </button>
+        </div>
+        <div class="item">
+          <h3>Tokens Available: <span id="tokensAvailable"></span></h3>
+          <button
+            onclick="getAvailableTokens()"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Update Tokens Available
+          </button>
+        </div>
+        <div class="item">
+          <h3>My Token Balance: <span id="tokenBalance"></span></h3>
+          <button
+            onclick="getTokenBalance()"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Update My Token Balance
+          </button>
+          <div class="item">
+            <button
+              onclick="withdrawETH()"
+              class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            >
+              Withdraw ETH
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="item">
+          <h3>Grant DEX Access</h3>
+          <div>
+            <input
+              type="number"
+              min="0"
+              placeholder="Enter number of tokens"
+              id="tokenGrant"
+            />
+            <button
+              onclick="grantAccess()"
+              class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+            >
+              Grant
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <h2>User Controls</h2>
+      <div class="item">
+        <h3>Buy Tokens</h3>
+        <div>
+          <input
+            type="number"
+            min="0"
+            placeholder="Enter number of tokens"
+            id="tokensToBuy"
+          />
+          <button
+            onclick="buyTokens()"
+            class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+          >
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
