@@ -23,6 +23,8 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^5.2.0"
+    "@openzeppelin/contracts": "^5.2.0",
+    "@tailwindcss/cli": "^4.0.12",
+    "tailwindcss": "^4.0.12"
   }
 }
