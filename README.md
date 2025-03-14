@@ -10,6 +10,9 @@ This project demonstrates a simple decentralized exchange (DEX) implementation t
   - Liquidity provision by the owner
   - ETH withdrawals by the owner
 
+## Frontend
+You can visit the frontend [here](https://papapana.github.io/erc20_dex_demo/).
+
 ## Features
 
 - Fixed price token exchange
